@@ -1,0 +1,38 @@
+= Python
+
+My notes on python specific development.
+
+:toc:
+
+== os.system
+
+Prefer `subprocess.run(..., shell=False)` or
+`subprocess.call(..., shell=False)` instead of `os.system()`.
+
+The `os.system()` function executes a command in a subshell. First a shell
+process is created then the shell spawns a process for the command resulting in
+two child processes. There are performance, security, and compatibility reasons
+to avoid executing a command in a subshell.
+* Spawning a shell process adds overhead. For quick commands repeated often the
+overhead could be significant.
+* The `os.system()` function ignores SIGINT and SIGQUIT while the command is
+running.
+* Using a subshell assumes the shell syntax and language which may not be
+compatible with a different OS or shell.
+* Using a subshell process is a risk for shell injection, especially if the
+command involves user input.
++
+.Example shell injection:
+[source,python]
+----
+>>> import os
+>>> # Possible input from user
+>>> file_name = "foo.txt; echo hello world"
+>>> retcode = os.system(f"touch {file_name}")
+hello world
+----
+
+References:
+* https://www.youtube.com/watch?v=oQxTSDh-ECk[anthony explains... don't use os.system!]
+* https://docs.python.org/3/library/os.html#os.system[os.system()]
+* https://docs.python.org/3/library/subprocess.html#replacing-os-system[Replacing os.system() with subprocess]
