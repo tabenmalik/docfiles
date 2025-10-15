@@ -1,8 +1,9 @@
 = Python
+:toc: macro
 
 My notes on python specific development.
 
-:toc:
+toc::[]
 
 == os.system
 
