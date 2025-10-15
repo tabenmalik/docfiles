@@ -13,6 +13,7 @@ The `os.system()` function executes a command in a subshell. First a shell
 process is created then the shell spawns a process for the command resulting in
 two child processes. There are performance, security, and compatibility reasons
 to avoid executing a command in a subshell.
+
 * Spawning a shell process adds overhead. For quick commands repeated often the
 overhead could be significant.
 * The `os.system()` function ignores SIGINT and SIGQUIT while the command is
@@ -33,6 +34,7 @@ hello world
 ----
 
 References:
+
 * https://www.youtube.com/watch?v=oQxTSDh-ECk[anthony explains... don't use os.system!]
 * https://docs.python.org/3/library/os.html#os.system[os.system()]
 * https://docs.python.org/3/library/subprocess.html#replacing-os-system[Replacing os.system() with subprocess]
