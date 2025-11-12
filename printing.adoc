@@ -1,0 +1,30 @@
+= 3D Printing
+:toc: macro
+
+My notes on 3D printing.
+
+toc::[]
+
+== Filament Drying
+
+Drying times for the filament types I print in.
+
+[cols="1,1,1"]
+|===
+|Material
+|Temperature
+|Duration
+
+|PLA
+|45°C/113°F
+|4-6 hours
+
+|PETG
+|55°C/131°F
+|4-6 hours
+
+|===
+
+References:
+
+* https://help.prusa3d.com/article/drying-filament_332086[Prusa Knowledgebase: Drying filament]

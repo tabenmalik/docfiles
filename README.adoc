@@ -1,3 +1,3 @@
 = DocFiles
 
-My software development notes.
+Notes on my hobbies.
