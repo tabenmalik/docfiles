@@ -1,0 +1,37 @@
+= Docker
+:toc: macro
+
+toc::[]
+
+== Trailing noop command
+
+Use bash's `:` command to end compound `RUN` statements in
+dockerfiles. An ending `:` command allows for inserting
+new statements without generating a merge conflict (due
+to the required newline escape).
+
+The `:` bash built-in is a noop command equivalent to the
+`true` command.
+
+.Example usage
+[source,dockerfile]
+----
+RUN : \
+    && command1 \
+    && command2 \
+    && :
+----
+
+.Adding a new line before the the trailing `:`
+[source,dockerfile]
+----
+RUN : \
+    && command1 \
+    && command2 \
+    && inserted-command \
+    :
+----
+
+References:
+
+* https://youtu.be/BdxdRlTnPEE[anthony explains: dockerfile RUN : \ && syntax]
