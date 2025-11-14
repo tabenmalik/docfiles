@@ -9,6 +9,8 @@ Techniques for minimizing merge conflicts with collaborative git repos.
 
 * Python
 ** xref:python.adoc#one-import-per-line[One import per line]
+* Docker
+** xref:docker.adoc#trailing-noop-command[Trailing noop command]
 
 == Default Branch Name
 
