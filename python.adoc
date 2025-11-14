@@ -5,6 +5,26 @@ My notes on python specific development.
 
 toc::[]
 
+== One import per line
+
+Separate imports to one import per line.
+
+.Example:
+[source,python]
+----
+from os import path
+from os import system
+----
+
+This is a step further from PEP 8 style that helps to avoid
+merge conflicts. Use the pre-commit hook `reorder-python-imports`
+to automatically separate imports.
+
+References:
+
+* https://github.com/asottile/reorder-python-imports[reorder-python-imports]
+* https://peps.python.org/pep-0008/#imports[PEP 8: Imports]
+
 == os.system
 
 Prefer `subprocess.run(..., shell=False)` or
