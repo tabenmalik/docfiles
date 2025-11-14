@@ -3,6 +3,13 @@
 
 toc::[]
 
+== Minimizing Merge Conflicts
+
+Techniques for minimizing merge conflicts with collaborative git repos.
+
+* Python
+** xref:python.adoc#one-import-per-line[One import per line]
+
 == Default Branch Name
 
 The default branch name of repos should be `main`, or otherwise
