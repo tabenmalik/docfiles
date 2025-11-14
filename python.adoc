@@ -5,6 +5,29 @@ My notes on python specific development.
 
 toc::[]
 
+== Project layout
+
+Prefer to use the "src layout" for python projects.
+The src layout avoids common development pitfalls from the
+python interpreter adding the current working
+directory in the import search path.
+
+.Example "src layout" project tree
+[source]
+----
+.
+├── README.adoc
+├── pyproject.toml
+└── src/
+    └── my_python_package/
+        ├── __init__.py
+        └── module.py
+----
+
+References
+
+* https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/[Python Packaging: src layout vs flat layout]
+
 == One import per line
 
 Separate imports to one import per line.
