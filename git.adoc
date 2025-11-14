@@ -1,0 +1,35 @@
+= Git
+:toc: macro
+
+toc::[]
+
+== Default Branch Name
+
+The default branch name of repos should be `main`, or otherwise
+not `master`.
+
+The historical default branch name of `master` is not inclusive
+to all communities and should be avoided. GitHub and GitLab use
+`main` as the default branch for new repositories starting in 2020.
+
+Git also provides a setting, since Git 2.28.0, to define the
+default branch name when using `git init`.
+
+.Set default branch by CLI:
+[source,shell]
+----
+$ git config set --global
+----
+
+.Or editing a gitconfig file:
+[source,ini]
+----
+[init]
+    defaultBranch = main
+----
+
+References:
+
+* https://sfconservancy.org/news/2020/jun/23/gitbranchname/
+* https://about.gitlab.com/blog/new-git-default-branch-name/
+* https://github.blog/changelog/2020-10-01-the-default-branch-for-newly-created-repositories-is-now-main/
