@@ -28,12 +28,139 @@ References
 
 * https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/[Python Packaging: src layout vs flat layout]
 
+== Profiling
+
+A few useful ways to profile and visualize performance.
+
+=== Import time profiling
+
+The python command provides an option to show how long each import
+takes.
+
+.Example:
+[source,console]
+----
+$ python3 -X importtime -c "import pprint"
+import time: self [us] | cumulative | imported package
+import time:       439 |        439 |   _io
+import time:        80 |         80 |   marshal
+import time:       596 |        596 |   posix
+import time:      1286 |       2400 | _frozen_importlib_external
+import time:       191 |        191 |   time
+import time:       508 |        698 | zipimport
+import time:       112 |        112 |     _codecs
+import time:      1116 |       1227 |   codecs
+import time:       826 |        826 |   encodings.aliases
+...
+----
+
+The output includes import time of modules that are always
+imported as a part of the interpreter startup. Interpretting
+the output can be a little difficult given the odd semi-reverse
+ordering. The
+https://github.com/asottile/importtime-waterfall/[importtime-waterfall]
+tool provides slightly more sane console output along with a
+pathway for visualizing the import times.
+
+.importtime-waterfall:
+[source,console]
+----
+$ importtime-waterfall pprint
+pprint (512)
+  collections (1317)
+    itertools (202)
+    keyword (204)
+    operator (462)
+      _operator (115)
+    reprlib (321)
+    _collections (116)
+  dataclasses (1046)
+    re (919)
+      enum (2768)
+        functools (925)
+          _functools (99)
+        types (440)
+      re._compiler (555)
+        _sre (118)
+        re._parser (607)
+          re._constants (422)
+        re._casefix (175)
+      copyreg (278)
+    copy (298)
+      weakref (710)
+        _weakrefset (342)
+    inspect (3929)
+      ast (2248)
+        _ast (1712)
+        contextlib (1028)
+      dis (1441)
+        opcode (486)
+          _opcode (106)
+          _opcode_metadata (317)
+      importlib.machinery (110)
+        importlib (266)
+      tokenize (1337)
+        token (273)
+        _tokenize (63)
+----
+
+=== Deterministic profiling
+:data-uri:
+
+Use the `cProfile` module for deterministic profiling of
+an application. The profile can be visualized with a combination
+of `gprof2dot` and `dot`.
+
+.script.py
+[source,python]
+----
+def quick():
+    for _ in range(100):
+        pass
+
+def long():
+    for _ in range(10000):
+        pass
+
+quick()
+long()
+----
+
+.Standard cProfile output
+[source,console]
+----
+$ python3 -m cProfile script.py
+         5 function calls in 0.150 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.150    0.150 {built-in method builtins.exec}
+        1    0.000    0.000    0.150    0.150 a.py:1(<module>)
+        1    0.134    0.134    0.134    0.134 a.py:5(long)
+        1    0.016    0.016    0.016    0.016 a.py:1(quick)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+
+----
+
+.Visualizing cProfile output
+[source,console]
+----
+$ python3 -m cProfile --outfile profile.pstats script.py
+$ gprof2dot --root 'script:1:<module>' --format pstats profile.pstats | dot -Tsvg -o profile.svg
+$ firefox profile.svg &
+----
+
+image::profile.svg[Graph of profile]
+
 == One import per line
 
 Separate imports to one import per line.
 
 .Example:
-[source,python]
+[source,bash]
 ----
 from os import path
 from os import system
