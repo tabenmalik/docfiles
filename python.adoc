@@ -5,6 +5,27 @@ My notes on python specific development.
 
 toc::[]
 
+== Useful Python Projects
+
+Development tools:
+* https://github.com/coveragepy/coveragepy[coverage]: python code coverage
+* https://github.com/asottile/covdefaults[covdefaults]: nice defaults to coverage
+* https://github.com/asottile/pyupgrade[pyupgrade]: upgrade python syntax
+* https://github.com/psf/black[black]: opinionated python formatting
+* https://github.com/asottile/astpretty[astpretty]: pretty print python ast
+* https://github.com/pre-commit/pre-commit[pre-commit]: manage pre-commit hooks
+* https://github.com/pre-commit/pre-commit-hooks[pre-commit-hooks]: basic hooks for universal needs
+* https://github.com/jrfonseca/gprof2dot[gprof2dot]: converts profiling data into a dot graph
+* https://github.com/PyCQA/isort[isort]: sort and style imports
+* https://github.com/asottile/all-repos[all-repos]: make sweeping changes across repos
+* https://github.com/pytest-dev/pytest[pytest]: ergonomic test framework
+* https://github.com/PyCQA/flake8[flake8]: python style and quality checks
+
+Libraries:
+* https://github.com/asottile/tokenize-rt[tokenize-rt]: improves upon stdlib tokenize for roundtrips
+* https://github.com/tox-dev/platformdirs[platformdirs]: platform-specific directories
+* https://github.com/tox-dev/filelock[filelock]: file lock interface
+
 == Project layout
 
 Prefer to use the "src layout" for python projects.
