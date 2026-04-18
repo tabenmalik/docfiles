@@ -3,7 +3,13 @@
 
 toc::[]
 
-== Trailing noop command
+
+== Style
+
+These styling rules are not strict but what I personally use
+to keep dockerfiles readable, grep-able, and git friendly.
+
+=== Trailing noop command
 
 Use bash's `:` command to end compound `RUN` statements in
 dockerfiles. An ending `:` command allows for inserting
@@ -35,3 +41,28 @@ RUN : \
 References:
 
 * https://youtu.be/BdxdRlTnPEE[anthony explains: dockerfile RUN : \ && syntax]
+
+=== Single line statements
+
+Each command should be on its own line. Long commands can be broken
+up into multiple lines with additional indentation.
+Commands that list packages should have each package
+on its own line and alphabetized.
+
+[source,dockerfile]
+----
+RUN : \
+	&& command1 \
+	&& download-pkgs \
+		abc-pkg \
+		hello-world \
+		howdy-texas \
+	&& long-command-with-many-flags \
+		--flag1 \
+		--flag2 \
+		--flagN \
+	&& comand-with-pipe | \
+		second-command --process | \
+		final-command \
+	&& :
+----
