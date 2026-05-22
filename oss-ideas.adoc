@@ -1,0 +1,10 @@
+* space-launch: a fun alternative to steam locomotive
+* asciidoctor python package wrapper
+* emoji search in micro
+* my own text editor. inspired by babi
+* bt: python implementations of things i'm interested in
+* mini blog
+* pandas faster categorical transforms
+* formattre: a library that brings together regex and format strings
+* python pager function: pulls up a pager to display object. inspired by help(). such as viewing dataframes or large datasets
+* kaitai struct file for prusa binary format
