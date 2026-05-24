@@ -9,3 +9,4 @@
 * python pager function: pulls up a pager to display object. inspired by help(). such as viewing dataframes or large datasets
 * kaitai struct file for prusa binary format
 * importtime-waterfall google trace support
+* mypy plugin for default config
