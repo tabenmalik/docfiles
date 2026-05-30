@@ -10,3 +10,5 @@
 * kaitai struct file for prusa binary format
 * importtime-waterfall google trace support
 * mypy plugin for default config
+* visidata plugin for IGS data formats (RINEX, SINEX, etc.)
+* spelling bee and wordle clones in curses, inspired by asottile wordle clone video
