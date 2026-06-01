@@ -12,3 +12,4 @@
 * mypy plugin for default config
 * visidata plugin for IGS data formats (RINEX, SINEX, etc.)
 * spelling bee and wordle clones in curses, inspired by asottile wordle clone video
+* minesweeper in curses
