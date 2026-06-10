@@ -8,6 +8,7 @@ toc::[]
 == Useful Python Projects
 
 Development tools:
+
 * https://github.com/coveragepy/coveragepy[coverage]: python code coverage
 * https://github.com/asottile/covdefaults[covdefaults]: nice defaults to coverage
 * https://github.com/asottile/pyupgrade[pyupgrade]: upgrade python syntax
@@ -22,6 +23,7 @@ Development tools:
 * https://github.com/PyCQA/flake8[flake8]: python style and quality checks
 
 Libraries:
+
 * https://github.com/asottile/tokenize-rt[tokenize-rt]: improves upon stdlib tokenize for roundtrips
 * https://github.com/tox-dev/platformdirs[platformdirs]: platform-specific directories
 * https://github.com/tox-dev/filelock[filelock]: file lock interface
