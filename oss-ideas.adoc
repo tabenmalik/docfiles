@@ -13,5 +13,5 @@
 * spelling bee and wordle clones in curses, inspired by asottile wordle clone video
 * minesweeper in curses
 
-* [.line-through]#formattre: a library that brings together regex and format strings#
-    * the library already exists as https://github.com/r1chardj0n3s/parse[parse]!
+* +++<del>+++formattre: a library that brings together regex and format strings+++</del>+++
+** the library already exists as https://github.com/r1chardj0n3s/parse[parse]!
