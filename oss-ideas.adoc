@@ -5,7 +5,6 @@
 * bt: python implementations of things i'm interested in
 * mini blog
 * pandas faster categorical transforms
-* formattre: a library that brings together regex and format strings
 * python pager function: pulls up a pager to display object. inspired by help(). such as viewing dataframes or large datasets
 * kaitai struct file for prusa binary format
 * importtime-waterfall google trace support
@@ -13,3 +12,6 @@
 * visidata plugin for IGS data formats (RINEX, SINEX, etc.)
 * spelling bee and wordle clones in curses, inspired by asottile wordle clone video
 * minesweeper in curses
+
+* [.line-through]#formattre: a library that brings together regex and format strings#
+    * the library already exists as https://github.com/r1chardj0n3s/parse[parse]!
