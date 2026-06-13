@@ -20,10 +20,13 @@ otherwise the cache will remain in the image in an intermediate
 layer.
 
 Here's a few known tools that generate caches and how to delete
-them:
+or avoid the cache:
 
 * apt: `apt-get clean && rm -r /var/lib/apt/lists/*`
 * pip: `pip install --no-cache-dir`
+* yum: `yum clean all`
+* dnf: `dnf clean all`
+* conda: `conda clean --all --yes`
 
 === Use multi-stage builds
 
