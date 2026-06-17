@@ -28,3 +28,28 @@ Drying times for the filament types I print in.
 References:
 
 * https://help.prusa3d.com/article/drying-filament_332086[Prusa Knowledgebase: Drying filament]
+
+== Manual Filament Swapping (WIP)
+
+Multi-color printing is possible with a single extruder and manual
+color swaps. PrusaSlicer already makes it easy to insert a color swap
+at a given layer, but mid-layer manual color swaps is not directly supported.
+These are my settings to achieve arbitrary multi-color prints without
+an MMU. Very much a work in progress.
+
+* Printers -> General -> Extruders: set to number of colors
+* Printers -> General -> Single Extruder Multi Material: check
+* Printers -> Gustom G-code -> Tool change G-code:
++
+----
+{if layer_z > 0}
+M600
+G1 E0.3 F1500 ; prime after color change
+{endif}
+----
+* Printers -> Extruder X -> Extruder color: set to color for print
+* Printers -> Single extruder MM setup -> Filament parking position: Set to 5mm
+
+References:
+
+* https://www.reddit.com/r/prusa3d/comments/1g51q32/comment/mx0p7br/
