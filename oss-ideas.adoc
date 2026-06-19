@@ -12,6 +12,8 @@
 * visidata plugin for IGS data formats (RINEX, SINEX, etc.)
 * spelling bee and wordle clones in curses, inspired by asottile wordle clone video
 * minesweeper in curses
+* pre-commit hook that checks meta data that should be the same between conda and setuptools config
+* deadsnakes-esque ppa but for slurm
 
 * +++<del>+++formattre: a library that brings together regex and format strings+++</del>+++
 ** the library already exists as https://github.com/r1chardj0n3s/parse[parse]!
