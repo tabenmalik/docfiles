@@ -15,5 +15,7 @@
 * pre-commit hook that checks meta data that should be the same between conda and setuptools config
 * deadsnakes-esque ppa but for slurm
 
-* +++<del>+++formattre: a library that brings together regex and format strings+++</del>+++
-** the library already exists as https://github.com/r1chardj0n3s/parse[parse]!
+---
+
+* ~~formattre: a library that brings together regex and format strings~~
+    * the library already exists as [parse](https://github.com/r1chardj0n3s/parse)!

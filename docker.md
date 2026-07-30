@@ -1,17 +1,13 @@
-= Docker
-:toc: macro
+# Docker
 
-toc::[]
-
-
-== Slim Docker Images
+## Slim Docker Images
 
 Slim container images make for faster builds,
 less disk usage, and less bandwidth usage. Over
 large scales, slim images can make a difference.
 Here's a few techniques for keeping images slim.
 
-=== Remove unnecessary caches
+### Remove unnecessary caches
 
 If the cache is not necessary for the running of an image
 then delete the cache. Make sure to clean up the cache
@@ -28,16 +24,15 @@ or avoid the cache:
 * dnf: `dnf clean all`
 * conda: `conda clean --all --yes`
 
-=== Use multi-stage builds
+### Use multi-stage builds
 
 Multi-stage builds allow for selectively copying artifacts
 from one stage to another. For example, one stage can install
 build dependencies and build a package, then the second stage
 copies the built package without installing the build dependencies.
 
-.Example of building CPython in one stage and installing the build in a second stage
-[source,dockerfile]
-----
+Example of building CPython in one stage and installing the build in a second stage:
+```dockerfile
 # build cpython
 FROM ubuntu:22.04 AS CPythonBuild
 WORKDIR /cpython
@@ -64,25 +59,24 @@ RUN : \
 FROM ubuntu:22.04 as CPython
 COPY --from=CPythonBuild /cpython/python /cpython/python
 RUN /cpython/python -c "print('hello world!')"
-----
+```
 
 Looking at the resulting image sizes, the CPython image is smaller than CPythonBuild image
 due to the separate staging and selective copying.
 
-[source,bash]
-----
+```console
 % docker image ls
 REPOSITORY                TAG         IMAGE ID      CREATED        SIZE
 localhost/cpython         316         1a08435e1659  2 minutes ago  118 MB
 <none>                    <none>      8e321dd21b24  2 minutes ago  1.1 GB
-----
+```
 
-== Style
+## Style
 
 These styling rules are not strict but what I personally use
 to keep dockerfiles readable, grep-able, and git friendly.
 
-=== Trailing noop command
+### Trailing noop command
 
 Use bash's `:` command to end compound `RUN` statements in
 dockerfiles. An ending `:` command allows for inserting
@@ -92,38 +86,35 @@ to the required newline escape).
 The `:` bash built-in is a noop command equivalent to the
 `true` command.
 
-.Example usage
-[source,dockerfile]
-----
+Example usage:
+```dockerfile
 RUN : \
     && command1 \
     && command2 \
     && :
-----
+```
 
-.Adding a new line before the the trailing `:`
-[source,dockerfile]
-----
+Adding a new line before the the trailing `:`:
+```dockerfile
 RUN : \
     && command1 \
     && command2 \
     && inserted-command \
-    :
-----
+    && :
+```
 
 References:
 
-* https://youtu.be/BdxdRlTnPEE[anthony explains: dockerfile RUN : \ && syntax]
+* [anthony explains: dockerfile RUN : \ && syntax](https://youtu.be/BdxdRlTnPEE)
 
-=== Single line statements
+### Single line statements
 
 Each command should be on its own line. Long commands can be broken
 up into multiple lines with additional indentation.
 Commands that list packages should have each package
 on its own line and alphabetized.
 
-[source,dockerfile]
-----
+```dockerfile
 RUN : \
 	&& command1 \
 	&& download-pkgs \
@@ -138,4 +129,4 @@ RUN : \
 		second-command --process | \
 		final-command \
 	&& :
-----
+```
