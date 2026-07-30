@@ -1,43 +1,38 @@
-= Python
-:toc: macro
+# Python
 
 My notes on python specific development.
 
-toc::[]
-
-== Useful Python Projects
+## Useful Python Projects
 
 Development tools:
 
-* https://github.com/coveragepy/coveragepy[coverage]: python code coverage
-* https://github.com/asottile/covdefaults[covdefaults]: nice defaults to coverage
-* https://github.com/asottile/pyupgrade[pyupgrade]: upgrade python syntax
-* https://github.com/psf/black[black]: opinionated python formatting
-* https://github.com/asottile/astpretty[astpretty]: pretty print python ast
-* https://github.com/pre-commit/pre-commit[pre-commit]: manage pre-commit hooks
-* https://github.com/pre-commit/pre-commit-hooks[pre-commit-hooks]: basic hooks for universal needs
-* https://github.com/jrfonseca/gprof2dot[gprof2dot]: converts profiling data into a dot graph
-* https://github.com/PyCQA/isort[isort]: sort and style imports
-* https://github.com/asottile/all-repos[all-repos]: make sweeping changes across repos
-* https://github.com/pytest-dev/pytest[pytest]: ergonomic test framework
-* https://github.com/PyCQA/flake8[flake8]: python style and quality checks
+* [coverage](https://github.com/coveragepy/coveragepy): python code coverage
+* [covdefaults](https://github.com/asottile/covdefaults): nice defaults to coverage
+* [pyupgrade](https://github.com/asottile/pyupgrade): upgrade python syntax
+* [black](https://github.com/psf/black): opinionated python formatting
+* [astpretty](https://github.com/asottile/astpretty): pretty print python ast
+* [pre-commit](https://github.com/pre-commit/pre-commit): manage pre-commit hooks
+* [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks): basic hooks for universal needs
+* [gprof2dot](https://github.com/jrfonseca/gprof2dot): converts profiling data into a dot graph
+* [isort](https://github.com/PyCQA/isort): sort and style imports
+* [all-repos](https://github.com/asottile/all-repos): make sweeping changes across repos
+* [pytest](https://github.com/pytest-dev/pytest): ergonomic test framework
+* [flake8](https://github.com/PyCQA/flake8): python style and quality checks
 
 Libraries:
 
-* https://github.com/asottile/tokenize-rt[tokenize-rt]: improves upon stdlib tokenize for roundtrips
-* https://github.com/tox-dev/platformdirs[platformdirs]: platform-specific directories
-* https://github.com/tox-dev/filelock[filelock]: file lock interface
+* [tokenize-rt](https://github.com/asottile/tokenize-rt): improves upon stdlib tokenize for roundtrips
+* [platformdirs](https://github.com/tox-dev/platformdirs): platform-specific directories
+* [filelock](https://github.com/tox-dev/filelock): file lock interface
 
-== Project layout
+## Project layout
 
 Prefer to use the "src layout" for python projects.
 The src layout avoids common development pitfalls from the
 python interpreter adding the current working
 directory in the import search path.
 
-.Example "src layout" project tree
-[source]
-----
+```console
 .
 ├── README.adoc
 ├── pyproject.toml
@@ -45,24 +40,22 @@ directory in the import search path.
     └── my_python_package/
         ├── __init__.py
         └── module.py
-----
+```
 
-References
+References:
 
-* https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/[Python Packaging: src layout vs flat layout]
+* [Python Packaging: src layout vs flat layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/)
 
-== Profiling
+## Profiling
 
 A few useful ways to profile and visualize performance.
 
-=== Import time profiling
+### Import time profiling
 
 The python command provides an option to show how long each import
 takes.
 
-.Example:
-[source,console]
-----
+```console
 $ python3 -X importtime -c "import pprint"
 import time: self [us] | cumulative | imported package
 import time:       439 |        439 |   _io
@@ -75,19 +68,17 @@ import time:       112 |        112 |     _codecs
 import time:      1116 |       1227 |   codecs
 import time:       826 |        826 |   encodings.aliases
 ...
-----
+```
 
 The output includes import time of modules that are always
 imported as a part of the interpreter startup. Interpretting
 the output can be a little difficult given the odd semi-reverse
 ordering. The
-https://github.com/asottile/importtime-waterfall/[importtime-waterfall]
+[importtime-waterfall](https://github.com/asottile/importtime-waterfall/)
 tool provides slightly more sane console output along with a
 pathway for visualizing the import times.
 
-.importtime-waterfall:
-[source,console]
-----
+```console
 $ importtime-waterfall pprint
 pprint (512)
   collections (1317)
@@ -125,18 +116,16 @@ pprint (512)
       tokenize (1337)
         token (273)
         _tokenize (63)
-----
+```
 
-=== Deterministic profiling
-:data-uri:
+### Deterministic profiling
 
 Use the `cProfile` module for deterministic profiling of
 an application. The profile can be visualized with a combination
 of `gprof2dot` and `dot`.
 
-.script.py
-[source,python]
-----
+script.py:
+```python
 def quick():
     for _ in range(100):
         pass
@@ -147,11 +136,10 @@ def long():
 
 quick()
 long()
-----
+```
 
-.Standard cProfile output
-[source,console]
-----
+Standard cProfile output:
+```console
 $ python3 -m cProfile script.py
          5 function calls in 0.150 seconds
 
@@ -166,28 +154,26 @@ $ python3 -m cProfile script.py
 
 
 
-----
+```
 
-.Visualizing cProfile output
-[source,console]
-----
+Visualizing cProfile output:
+```console
 $ python3 -m cProfile --outfile profile.pstats script.py
 $ gprof2dot --root 'script:1:<module>' --format pstats profile.pstats | dot -Tsvg -o profile.svg
 $ firefox profile.svg &
-----
+```
 
-image::profile.svg[Graph of profile]
+![Graph of profile](./profile.svg)
 
-== One import per line
+## One import per line
 
 Separate imports to one import per line.
 
-.Example:
-[source,bash]
-----
+Example:
+```python
 from os import path
 from os import system
-----
+```
 
 This is a step further from PEP 8 style that helps to avoid
 merge conflicts. Use the pre-commit hook `reorder-python-imports`
@@ -195,10 +181,10 @@ to automatically separate imports.
 
 References:
 
-* https://github.com/asottile/reorder-python-imports[reorder-python-imports]
-* https://peps.python.org/pep-0008/#imports[PEP 8: Imports]
+* [reorder-python-imports](https://github.com/asottile/reorder-python-imports)
+* [PEP 8: Imports](https://peps.python.org/pep-0008/#imports)
 
-== os.system
+## os.system
 
 Prefer `subprocess.run(..., shell=False)` or
 `subprocess.call(..., shell=False)` instead of `os.system()`.
@@ -209,26 +195,23 @@ two child processes. There are performance, security, and compatibility reasons
 to avoid executing a command in a subshell.
 
 * Spawning a shell process adds overhead. For quick commands repeated often the
-overhead could be significant.
+  overhead could be significant.
 * The `os.system()` function ignores SIGINT and SIGQUIT while the command is
-running.
+  running.
 * Using a subshell assumes the shell syntax and language which may not be
-compatible with a different OS or shell.
+  compatible with a different OS or shell.
 * Using a subshell process is a risk for shell injection, especially if the
-command involves user input.
-+
-.Example shell injection:
-[source,python]
-----
->>> import os
->>> # Possible input from user
->>> file_name = "foo.txt; echo hello world"
->>> retcode = os.system(f"touch {file_name}")
-hello world
-----
+  command involves user input. Example shell injection:
+  ```pycon
+  >>> import os
+  >>> # Possible input from user
+  >>> file_name = "foo.txt; echo hello world"
+  >>> retcode = os.system(f"touch {file_name}")
+  hello world
+  ```
 
 References:
 
-* https://www.youtube.com/watch?v=oQxTSDh-ECk[anthony explains... don't use os.system!]
-* https://docs.python.org/3/library/os.html#os.system[os.system()]
-* https://docs.python.org/3/library/subprocess.html#replacing-os-system[Replacing os.system() with subprocess]
+* [anthony explains... don't use os.system!](https://www.youtube.com/watch?v=oQxTSDh-ECk)
+* [os.system()](https://docs.python.org/3/library/os.html#os.system)
+* [Replacing os.system() with subprocess](https://docs.python.org/3/library/subprocess.html#replacing-os-system)

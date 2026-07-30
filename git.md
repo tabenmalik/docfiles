@@ -1,18 +1,15 @@
-= Git
-:toc: macro
+# Git
 
-toc::[]
-
-== Minimizing Merge Conflicts
+## Minimizing Merge Conflicts
 
 Techniques for minimizing merge conflicts with collaborative git repos.
 
 * Python
-** xref:python.adoc#one-import-per-line[One import per line]
+    * [One import per line](./python.md#one-import-per-line)
 * Docker
-** xref:docker.adoc#trailing-noop-command[Trailing noop command]
+    * [Trailing noop command](./docker.adoc#trailing-noop-command)
 
-== Default Branch Name
+## Default Branch Name
 
 The default branch name of repos should be `main`, or otherwise
 not `master`.
@@ -24,18 +21,16 @@ to all communities and should be avoided. GitHub and GitLab use
 Git also provides a setting, since Git 2.28.0, to define the
 default branch name when using `git init`.
 
-.Set default branch by CLI:
-[source,shell]
-----
+Set default branch by CLI:
+```console
 $ git config set --global
-----
+```
 
-.Or editing a gitconfig file:
-[source,ini]
-----
+Or editing a gitconfig file:
+```conf
 [init]
     defaultBranch = main
-----
+```
 
 References:
 

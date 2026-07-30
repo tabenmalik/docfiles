@@ -1,35 +1,22 @@
-= 3D Printing
-:toc: macro
+# 3D Printing
 
 My notes on 3D printing.
 
-toc::[]
-
-== Filament Drying
+## Filament Drying
 
 Drying times for the filament types I print in.
 
-[cols="1,1,1"]
-|===
-|Material
-|Temperature
-|Duration
+| Material | Temperature | Duration  |
+| -------- | ----------- | --------  |
+| PLA      | 45°C/113°F  | 4-6 hours |
+| PETG     | 55°C/131°F  | 4-6 hours |
 
-|PLA
-|45°C/113°F
-|4-6 hours
-
-|PETG
-|55°C/131°F
-|4-6 hours
-
-|===
 
 References:
 
-* https://help.prusa3d.com/article/drying-filament_332086[Prusa Knowledgebase: Drying filament]
+* [Prusa Knowledgebase: Drying filament](https://help.prusa3d.com/article/drying-filament_332086)
 
-== Manual Filament Swapping (WIP)
+## Manual Filament Swapping (WIP)
 
 Multi-color printing is possible with a single extruder and manual
 color swaps. PrusaSlicer already makes it easy to insert a color swap
@@ -40,16 +27,15 @@ an MMU. Very much a work in progress.
 * Printers -> General -> Extruders: set to number of colors
 * Printers -> General -> Single Extruder Multi Material: check
 * Printers -> Gustom G-code -> Tool change G-code:
-+
-----
-{if layer_z > 0}
-M600
-G1 E0.3 F1500 ; prime after color change
-{endif}
-----
+  ```
+  {if layer_z > 0}
+  M600
+  G1 E0.3 F1500 ; prime after color change
+  {endif}
+  ```
 * Printers -> Extruder X -> Extruder color: set to color for print
 * Printers -> Single extruder MM setup -> Filament parking position: Set to 5mm
 
 References:
 
-* https://www.reddit.com/r/prusa3d/comments/1g51q32/comment/mx0p7br/
+* [https://www.reddit.com/r/prusa3d/comments/1g51q32/comment/mx0p7br/](https://www.reddit.com/r/prusa3d/comments/1g51q32/comment/mx0p7br/)
