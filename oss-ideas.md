@@ -14,6 +14,7 @@
 * minesweeper in curses
 * pre-commit hook that checks meta data that should be the same between conda and setuptools config
 * deadsnakes-esque ppa but for slurm
+* hdf5 visidata plugin - improved over visidata's default hdf5 reader
 
 ---
 
